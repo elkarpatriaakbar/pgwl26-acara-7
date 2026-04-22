@@ -11,8 +11,8 @@
           <div class="col">
             <h5 class="mb-3">Peta Dora</h5>
 
-            <p>Repository: <a href="hhttps://github.com/elkarpatriaakbar/pgwl26" target="_blank"
-                rel="noopener noreferrer">https://github.com/elkarpatriaakbar/pgwl26</a> </p>
+            <p>Repository: <a href="https://github.com/elkarpatriaakbar/pgwl26-acara-7" target="_blank"
+                rel="noopener noreferrer">https://github.com/elkarpatriaakbar/pgwl26-acara-7</a> </p>
             <p class="mb-0">Library:</p>
             <ul>
               <li><a href="https://leafletjs.com" target="_blank" rel="noopener noreferrer">Leaflet JS</a></li>
