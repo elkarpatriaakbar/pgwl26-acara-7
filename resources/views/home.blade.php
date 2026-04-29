@@ -132,7 +132,16 @@
 
       layer.on({
         click: function(e) { layer.bindPopup(popupContent).openPopup(); },
-        mouseover: function(e) { layer.bindTooltip(feature.properties.name); },
+        mouseover: function(e) { 
+          var latlng = layer.getLatLng();
+          var coords = "Lat: " + latlng.lat.toFixed(4) + ", Long: " + latlng.lng.toFixed(4);
+          var tooltipContent = "<style>.tooltip-img { transition: all 0.3s ease; cursor: pointer; } .tooltip-img:hover { max-width: 300px !important; max-height: 300px !important; z-index: 1000; position: relative; box-shadow: 0 4px 8px rgba(0,0,0,0.3); }</style><div><strong>" + feature.properties.name + "</strong></div><div>" + coords + "</div>";
+          if (feature.properties.image_path) {
+            tooltipContent += "<img class='tooltip-img' src='" + storageUrl + "/" + feature.properties.image_path + "' style='max-width:100px;max-height:100px;margin-top:5px;border-radius:4px;' />";
+          }
+          layer.bindTooltip(tooltipContent).openTooltip();
+        },
+        mouseout: function(e) { layer.closeTooltip(); }
       });
     },
   });
@@ -161,7 +170,16 @@
 
       layer.on({
         click: function(e) { layer.bindPopup(popupContent).openPopup(); },
-        mouseover: function(e) { layer.bindTooltip(feature.properties.name); },
+        mouseover: function(e) { 
+          var center = layer.getBounds().getCenter();
+          var coords = "Center - Lat: " + center.lat.toFixed(4) + ", Lng: " + center.lng.toFixed(4);
+          var tooltipContent = "<style>.tooltip-img { transition: all 0.3s ease; cursor: pointer; } .tooltip-img:hover { max-width: 300px !important; max-height: 300px !important; z-index: 1000; position: relative; box-shadow: 0 4px 8px rgba(0,0,0,0.3); }</style><div><strong>" + feature.properties.name + "</strong></div><div>" + coords + "</div>";
+          if (feature.properties.image_path) {
+            tooltipContent += "<img class='tooltip-img' src='" + storageUrl + "/" + feature.properties.image_path + "' style='max-width:100px;max-height:100px;margin-top:5px;border-radius:4px;' />";
+          }
+          layer.bindTooltip(tooltipContent).openTooltip();
+        },
+        mouseout: function(e) { layer.closeTooltip(); }
       });
     },
   });
@@ -188,7 +206,16 @@
 
       layer.on({
         click: function(e) { layer.bindPopup(popupContent).openPopup(); },
-        mouseover: function(e) { layer.bindTooltip(feature.properties.name); },
+        mouseover: function(e) { 
+          var center = layer.getBounds().getCenter();
+          var coords = "Center - Lat: " + center.lat.toFixed(4) + ", Lng: " + center.lng.toFixed(4);
+          var tooltipContent = "<style>.tooltip-img { transition: all 0.3s ease; cursor: pointer; } .tooltip-img:hover { max-width: 300px !important; max-height: 300px !important; z-index: 1000; position: relative; box-shadow: 0 4px 8px rgba(0,0,0,0.3); }</style><div><strong>" + feature.properties.name + "</strong></div><div>" + coords + "</div>";
+          if (feature.properties.image_path) {
+            tooltipContent += "<img class='tooltip-img' src='" + storageUrl + "/" + feature.properties.image_path + "' style='max-width:100px;max-height:100px;margin-top:5px;border-radius:4px;' />";
+          }
+          layer.bindTooltip(tooltipContent).openTooltip();
+        },
+        mouseout: function(e) { layer.closeTooltip(); }
       });
     },
   });
