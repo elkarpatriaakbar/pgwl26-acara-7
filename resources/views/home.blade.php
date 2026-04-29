@@ -47,6 +47,28 @@
   // Default basemap
   lightMap.addTo(map);
 
+  // File validation function
+  function validateFile(input) {
+    var file = input.files[0];
+    if (file) {
+      var sizeMB = file.size / (1024 * 1024);
+      var allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+      
+      if (sizeMB > 2) {
+        alert('File size must be less than 2MB. Current size: ' + sizeMB.toFixed(2) + 'MB');
+        input.value = '';
+        return false;
+      }
+      
+      if (!allowedTypes.includes(file.type.toLowerCase())) {
+        alert('Only JPG, JPEG, and PNG files are allowed. Selected file type: ' + file.type);
+        input.value = '';
+        return false;
+      }
+    }
+    return true;
+  }
+
   /* --- 3. Skala Peta --- */
   L.control.scale({ position: 'bottomleft', metric: true, imperial: false }).addTo(map);
 
@@ -187,5 +209,29 @@
   };
 
   L.control.layers(baseMaps, overlayMaps, {collapsed: false}).addTo(map);
+
+  // Scroll to first error in modal when shown
+  $('.modal').on('shown.bs.modal', function() {
+    var modal = $(this);
+    var firstError = modal.find('.invalid-feedback').first();
+    if (firstError.length) {
+      var modalBody = modal.find('.modal-body');
+      modalBody.animate({ 
+        scrollTop: firstError.offset().top - modalBody.offset().top + modalBody.scrollTop() 
+      }, 500);
+    }
+  });
+
+  @if ($errors->any())
+    @if ($errors->has('name') || $errors->has('description') || $errors->has('geom_point') || $errors->has('image'))
+      $('#createpointModal').modal('show');
+    @endif
+    @if ($errors->has('name') || $errors->has('description') || $errors->has('geom_polyline') || $errors->has('image'))
+      $('#createpolylineModal').modal('show');
+    @endif
+    @if ($errors->has('name') || $errors->has('description') || $errors->has('geom_polygon') || $errors->has('image'))
+      $('#createpolygonModal').modal('show');
+    @endif
+  @endif
 </script>
 @endsection

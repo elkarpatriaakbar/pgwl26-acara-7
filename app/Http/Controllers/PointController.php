@@ -34,6 +34,13 @@ class PointController extends Controller
 	 */
 	public function store(Request $request)
 	{
+		$request->validate([
+			'name' => 'required',
+			'description' => 'required',
+			'geom_point' => 'required',
+			'image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+		]);
+
 		$data = [
 			'name' => $request->name,
 			'description' => $request->description,
@@ -42,6 +49,7 @@ class PointController extends Controller
 
 		if ($request->hasFile('image')) {
 			$data['image_path'] = $request->file('image')->store('uploads', 'public');
+			$data['image_name'] = $request->file('image')->getClientOriginalName();
 		}
 
 		try {
@@ -79,6 +87,13 @@ class PointController extends Controller
 	 */
 	public function update(Request $request, string $id)
 	{
+		$request->validate([
+			'name' => 'required',
+			'description' => 'required',
+			'geom' => 'required',
+			'image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+		]);
+
 		$data = [
 			'name' => $request->name,
 			'description' => $request->description,
@@ -87,6 +102,7 @@ class PointController extends Controller
 
 		if ($request->hasFile('image')) {
 			$data['image_path'] = $request->file('image')->store('uploads', 'public');
+			$data['image_name'] = $request->file('image')->getClientOriginalName();
 		}
 
 		if (!$this->point->find($id)->update($data)) {

@@ -55,11 +55,14 @@
             </div>
             <div class="mb-3">
               <label for="image_point" class="form-label">Photo</label>
-              <input class="form-control" type="file" id="image_point" name="image" accept="image/*">
+              <input class="form-control @error('image') is-invalid @enderror" type="file" id="image_point" name="image" accept="image/*" onchange="validateFile(this)" required>
+              @error('image')
+                <div class="invalid-feedback">{{ $message }}</div>
+              @enderror
             </div>
             <div class="mb-3">
               <label for="description" class="form-label">Description</label>
-              <textarea class="form-control" name="description" id="description" rows="5"></textarea>
+              <textarea class="form-control" name="description" id="description" rows="5" required></textarea>
             </div>
             <div class="mb-3">
               <label for="geom_point" class="form-label">Geometry WKT</label>
@@ -96,11 +99,14 @@
             </div>
             <div class="mb-3">
               <label for="image_polyline" class="form-label">Photo</label>
-              <input class="form-control" type="file" id="image_polyline" name="image" accept="image/*">
+              <input class="form-control @error('image') is-invalid @enderror" type="file" id="image_polyline" name="image" accept="image/*" onchange="validateFile(this)" required>
+              @error('image')
+                <div class="invalid-feedback">{{ $message }}</div>
+              @enderror
             </div>
             <div class="mb-3">
               <label for="description" class="form-label">Description</label>
-              <textarea class="form-control" name="description" id="description" rows="5"></textarea>
+              <textarea class="form-control" name="description" id="description" rows="5" required></textarea>
             </div>
             <div class="mb-3">
               <label for="geom_polyline" class="form-label">Geometry WKT</label>
@@ -137,11 +143,14 @@
             </div>
             <div class="mb-3">
               <label for="image_polygon" class="form-label">Photo</label>
-              <input class="form-control" type="file" id="image_polygon" name="image" accept="image/*">
+              <input class="form-control @error('image') is-invalid @enderror" type="file" id="image_polygon" name="image" accept="image/*" onchange="validateFile(this)" required>
+              @error('image')
+                <div class="invalid-feedback">{{ $message }}</div>
+              @enderror
             </div>
             <div class="mb-3">
               <label for="description" class="form-label">Description</label>
-              <textarea class="form-control" name="description" id="description" rows="5"></textarea>
+              <textarea class="form-control" name="description" id="description" rows="5" required></textarea>
             </div>
             <div class="mb-3">
               <label for="geom_polygon" class="form-label">Geometry WKT</label>
@@ -180,12 +189,15 @@
             </div>
             <div class="mb-3">
               <label for="image_edit_point" class="form-label">Photo</label>
-              <input class="form-control" type="file" id="image_edit_point" name="image" accept="image/*">
+              <input class="form-control @error('image') is-invalid @enderror" type="file" id="image_edit_point" name="image" accept="image/*" onchange="validateFile(this)" required>
+              @error('image')
+                <div class="invalid-feedback">{{ $message }}</div>
+              @enderror
               <img id="image_preview_point" class="img-fluid rounded mt-3 d-none" style="max-width:100%;height:auto;" src="" alt="Preview">
             </div>
             <div class="mb-3">
               <label for="description" class="form-label">Description</label>
-              <textarea class="form-control" name="description" id="description" rows="5"></textarea>
+              <textarea class="form-control" name="description" id="description" rows="5" required></textarea>
             </div>
             <div class="mb-3">
               <label for="geom" class="form-label">Geometry WKT</label>
@@ -225,12 +237,15 @@
             </div>
             <div class="mb-3">
               <label for="image_edit_polyline" class="form-label">Photo</label>
-              <input class="form-control" type="file" id="image_edit_polyline" name="image" accept="image/*">
+              <input class="form-control @error('image') is-invalid @enderror" type="file" id="image_edit_polyline" name="image" accept="image/*" onchange="validateFile(this)" required>
+              @error('image')
+                <div class="invalid-feedback">{{ $message }}</div>
+              @enderror
               <img id="image_preview_polyline" class="img-fluid rounded mt-3 d-none" style="max-width:100%;height:auto;" src="" alt="Preview">
             </div>
             <div class="mb-3">
               <label for="description" class="form-label">Description</label>
-              <textarea class="form-control" name="description" id="description" rows="5"></textarea>
+              <textarea class="form-control" name="description" id="description" rows="5" required></textarea>
             </div>
             <div class="mb-3">
               <label for="geom" class="form-label">Geometry WKT</label>
@@ -270,12 +285,15 @@
             </div>
             <div class="mb-3">
               <label for="image_edit_polygon" class="form-label">Photo</label>
-              <input class="form-control" type="file" id="image_edit_polygon" name="image" accept="image/*">
+              <input class="form-control @error('image') is-invalid @enderror" type="file" id="image_edit_polygon" name="image" accept="image/*" onchange="validateFile(this)" required>
+              @error('image')
+                <div class="invalid-feedback">{{ $message }}</div>
+              @enderror
               <img id="image_preview_polygon" class="img-fluid rounded mt-3 d-none" style="max-width:100%;height:auto;" src="" alt="Preview">
             </div>
             <div class="mb-3">
               <label for="description" class="form-label">Description</label>
-              <textarea class="form-control" name="description" id="description" rows="5"></textarea>
+              <textarea class="form-control" name="description" id="description" rows="5" required></textarea>
             </div>
             <div class="mb-3">
               <label for="geom" class="form-label">Geometry WKT</label>

@@ -12,13 +12,13 @@ class Polygons extends Model
 
 	public function polygons()
 {
-    return $this->selectRaw('id, name, description, image_path, ST_AsGeoJSON(geom) as geom, ST_Area(geom::geography) as area, created_at, updated_at')
+    return $this->selectRaw('id, name, description, image_path, image_name, ST_AsGeoJSON(geom) as geom, ST_Area(geom::geography) as area, created_at, updated_at')
         ->get();
 }
 
 public function polygon($id)
 {
-    return $this->selectRaw('id, name, description, image_path, ST_AsGeoJSON(geom) as geom, ST_Area(geom::geography) as area, created_at, updated_at')
+    return $this->selectRaw('id, name, description, image_path, image_name, ST_AsGeoJSON(geom) as geom, ST_Area(geom::geography) as area, created_at, updated_at')
         ->where('id', $id)
         ->first();
 }

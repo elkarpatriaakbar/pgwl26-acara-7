@@ -12,11 +12,11 @@ class Points extends Model
 
 	public function points()
 	{
-		return $this->select(DB::raw('id, name, description, image_path, ST_AsGeoJSON(geom) as geom, created_at, updated_at'))->get();
+		return $this->select(DB::raw('id, name, description, image_path, image_name, ST_AsGeoJSON(geom) as geom, created_at, updated_at'))->get();
 	}
 
 	public function point($id)
 	{
-		return $this->select(DB::raw('id, name, description, image_path, ST_AsGeoJSON(geom) as geom, created_at, updated_at'))->find($id);
+		return $this->select(DB::raw('id, name, description, image_path, image_name, ST_AsGeoJSON(geom) as geom, created_at, updated_at'))->find($id);
 	}
 }
