@@ -29,6 +29,7 @@ class ApiController extends Controller
 					'id' => $p->id,
 					'name' => $p->name,
 					'description' => $p->description,
+					'image_path' => $p->image_path,
 					'created_at' => $p->created_at,
 					'updated_at' => $p->updated_at
 				]
@@ -54,6 +55,7 @@ class ApiController extends Controller
 				'id' => $p->id,
 				'name' => $p->name,
 				'description' => $p->description,
+				'image_path' => $p->image_path,
 				'created_at' => $p->created_at,
 				'updated_at' => $p->updated_at
 			]
@@ -78,6 +80,7 @@ class ApiController extends Controller
 					'id' => $p->id,
 					'name' => $p->name,
 					'description' => $p->description,
+					'image_path' => $p->image_path,
 					'length' => $p->length, // in meters
 					'created_at' => $p->created_at,
 					'updated_at' => $p->updated_at
@@ -104,6 +107,7 @@ class ApiController extends Controller
 				'id' => $p->id,
 				'name' => $p->name,
 				'description' => $p->description,
+				'image_path' => $p->image_path,
 				'length' => $p->length, // in square meters
 				'created_at' => $p->created_at,
 				'updated_at' => $p->updated_at
@@ -129,6 +133,7 @@ class ApiController extends Controller
 					'id' => $p->id,
 					'name' => $p->name,
 					'description' => $p->description,
+					'image_path' => $p->image_path,
 					'area' => $p->area, // in square meters
 					'created_at' => $p->created_at,
 					'updated_at' => $p->updated_at
@@ -155,6 +160,7 @@ class ApiController extends Controller
 				'id' => $p->id,
 				'name' => $p->name,
 				'description' => $p->description,
+				'image_path' => $p->image_path,
 				'area' => $p->area, // in square meters
 				'created_at' => $p->created_at,
 				'updated_at' => $p->updated_at

@@ -40,13 +40,16 @@ class PolylineController extends Controller
 			'geom' => DB::raw("ST_GeomFromText('$request->geom_polyline')")
 		];
 
-		// create polyline
-		if (!$this->polyline->create($data)) {
-			return redirect()->back()->with('error', 'Failed to create polyline');
+		if ($request->hasFile('image')) {
+			$data['image_path'] = $request->file('image')->store('uploads', 'public');
 		}
 
-		// redirect back
-		return redirect()->back()->with('success', 'Polyline created successfully');
+		try {
+			Polylines::create($data);
+			return redirect()->back()->with('success', 'Polyline created successfully');
+		} catch (\Exception $e) {
+			return redirect()->back()->with('error', 'Failed to create polyline: ' . $e->getMessage());
+		}
 	}
 
 	/**
@@ -81,6 +84,10 @@ class PolylineController extends Controller
 			'description' => $request->description,
 			'geom' => DB::raw("ST_GeomFromText('$request->geom')")
 		];
+
+		if ($request->hasFile('image')) {
+			$data['image_path'] = $request->file('image')->store('uploads', 'public');
+		}
 
 		if (!$this->polyline->find($id)->update($data)) {
 			return redirect()->back()->with('error', 'Failed to update polyline');

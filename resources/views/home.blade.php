@@ -42,6 +42,8 @@
     attribution: 'Google Maps'
   });
 
+  var storageUrl = "{{ asset('storage') }}";
+
   // Default basemap
   lightMap.addTo(map);
 
@@ -93,10 +95,12 @@
       var editUrl = "{{ route('point.edit', ':id') }}".replace(':id', feature.properties.id);
       var deleteUrl = "{{ route('point.destroy', ':id') }}".replace(':id', feature.properties.id);
 
+      var imageHtml = feature.properties.image_path ? "<div class='mt-2'><img src='" + storageUrl + "/" + feature.properties.image_path + "' class='img-fluid rounded' style='max-width:100%;height:auto;'></div>" : "";
+
       var popupContent = "<table class='table table-sm'>" +
           "<tr><th>Name</th><td>:</td><td>" + feature.properties.name + "</td></tr>" +
           "<tr><th>Description</th><td>:</td><td>" + feature.properties.description + "</td></tr>" +
-        "</table>" +
+        "</table>" + imageHtml +
         "<div class='d-flex flex-row'>" +
         "<a href='" + editUrl + "' class='btn btn-sm btn-warning text-dark me-2'><i class='bi bi-pencil-square'></i></a>" +
         "<form action='" + deleteUrl + "' method='Post'>" +
@@ -118,10 +122,14 @@
       var editUrl = "{{ route('polyline.edit', ':id') }}".replace(':id', feature.properties.id);
       var deleteUrl = "{{ route('polyline.destroy', ':id') }}".replace(':id', feature.properties.id);
 
+      var imageHtml = feature.properties.image_path ? "<div class='mt-2'><img src='" + storageUrl + "/" + feature.properties.image_path + "' class='img-fluid rounded' style='max-width:100%;height:auto;'></div>" : "";
+
+      var length = Number(feature.properties.length) || 0;
+
       var popupContent = "<table class='table table-sm'>" +
           "<tr><th>Name</th><td>:</td><td>" + feature.properties.name + "</td></tr>" +
-          "<tr><th>Length</th><td>:</td><td>" + feature.properties.length.toFixed(2) + " m</td></tr>" +
-        "</table>" +
+          "<tr><th>Length</th><td>:</td><td>" + length.toFixed(2) + " m</td></tr>" +
+        "</table>" + imageHtml +
         "<div class='d-flex flex-row'>" +
         "<a href='" + editUrl + "' class='btn btn-sm btn-warning text-dark me-2'><i class='bi bi-pencil-square'></i></a>" +
         "<form action='" + deleteUrl + "' method='Post'>" +
@@ -143,10 +151,12 @@
       var editUrl = "{{ route('polygon.edit', ':id') }}".replace(':id', feature.properties.id);
       var deleteUrl = "{{ route('polygon.destroy', ':id') }}".replace(':id', feature.properties.id);
 
+      var imageHtml = feature.properties.image_path ? "<div class='mt-2'><img src='" + storageUrl + "/" + feature.properties.image_path + "' class='img-fluid rounded' style='max-width:100%;height:auto;'></div>" : "";
+
       var popupContent = "<table class='table table-sm'>" +
           "<tr><th>Name</th><td>:</td><td>" + feature.properties.name + "</td></tr>" +
           "<tr><th>Area</th><td>:</td><td>" + feature.properties.area.toFixed(2) + " m<sup>2</sup></td></tr>" +
-        "</table>" +
+        "</table>" + imageHtml +
         "<div class='d-flex flex-row'>" +
         "<a href='" + editUrl + "' class='btn btn-sm btn-warning text-dark me-2'><i class='bi bi-pencil-square'></i></a>" +
         "<form action='" + deleteUrl + "' method='Post'>" +

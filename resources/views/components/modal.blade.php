@@ -46,12 +46,16 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="{{ route('point.store') }}" method="Post">
+          <form action="{{ route('point.store') }}" method="Post" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
               <label for="name" class="form-label">Name</label>
               <input type="text" class="form-control" id="name" name="name" placeholder="Fill in the name"
                 required>
+            </div>
+            <div class="mb-3">
+              <label for="image_point" class="form-label">Photo</label>
+              <input class="form-control" type="file" id="image_point" name="image" accept="image/*">
             </div>
             <div class="mb-3">
               <label for="description" class="form-label">Description</label>
@@ -83,12 +87,16 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="{{ route('polyline.store') }}" method="Post">
+          <form action="{{ route('polyline.store') }}" method="Post" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
               <label for="name" class="form-label">Name</label>
               <input type="text" class="form-control" id="name" name="name"
                 placeholder="Fill in the name" required>
+            </div>
+            <div class="mb-3">
+              <label for="image_polyline" class="form-label">Photo</label>
+              <input class="form-control" type="file" id="image_polyline" name="image" accept="image/*">
             </div>
             <div class="mb-3">
               <label for="description" class="form-label">Description</label>
@@ -120,12 +128,16 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="{{ route('polygon.store') }}" method="Post">
+          <form action="{{ route('polygon.store') }}" method="Post" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
               <label for="name" class="form-label">Name</label>
               <input type="text" class="form-control" id="name" name="name"
                 placeholder="Fill in the name" required>
+            </div>
+            <div class="mb-3">
+              <label for="image_polygon" class="form-label">Photo</label>
+              <input class="form-control" type="file" id="image_polygon" name="image" accept="image/*">
             </div>
             <div class="mb-3">
               <label for="description" class="form-label">Description</label>
@@ -158,13 +170,18 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="{{ route('point.update', $id) }}" method="Post" id="form-update-point">
+          <form action="{{ route('point.update', $id) }}" method="Post" id="form-update-point" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="mb-3">
               <label for="name" class="form-label">Name</label>
               <input type="text" class="form-control" id="name" name="name"
                 placeholder="Fill in the name" required>
+            </div>
+            <div class="mb-3">
+              <label for="image_edit_point" class="form-label">Photo</label>
+              <input class="form-control" type="file" id="image_edit_point" name="image" accept="image/*">
+              <img id="image_preview_point" class="img-fluid rounded mt-3 d-none" style="max-width:100%;height:auto;" src="" alt="Preview">
             </div>
             <div class="mb-3">
               <label for="description" class="form-label">Description</label>
@@ -198,13 +215,18 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="{{ route('polyline.update', $id) }}" method="Post" id="form-update-polyline">
+          <form action="{{ route('polyline.update', $id) }}" method="Post" id="form-update-polyline" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="mb-3">
               <label for="name" class="form-label">Name</label>
               <input type="text" class="form-control" id="name" name="name"
                 placeholder="Fill in the name" required>
+            </div>
+            <div class="mb-3">
+              <label for="image_edit_polyline" class="form-label">Photo</label>
+              <input class="form-control" type="file" id="image_edit_polyline" name="image" accept="image/*">
+              <img id="image_preview_polyline" class="img-fluid rounded mt-3 d-none" style="max-width:100%;height:auto;" src="" alt="Preview">
             </div>
             <div class="mb-3">
               <label for="description" class="form-label">Description</label>
@@ -238,13 +260,18 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="{{ route('polygon.update', $id) }}" method="Post" id="form-update-polygon">
+          <form action="{{ route('polygon.update', $id) }}" method="Post" id="form-update-polygon" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="mb-3">
               <label for="name" class="form-label">Name</label>
               <input type="text" class="form-control" id="name" name="name"
                 placeholder="Fill in the name" required>
+            </div>
+            <div class="mb-3">
+              <label for="image_edit_polygon" class="form-label">Photo</label>
+              <input class="form-control" type="file" id="image_edit_polygon" name="image" accept="image/*">
+              <img id="image_preview_polygon" class="img-fluid rounded mt-3 d-none" style="max-width:100%;height:auto;" src="" alt="Preview">
             </div>
             <div class="mb-3">
               <label for="description" class="form-label">Description</label>

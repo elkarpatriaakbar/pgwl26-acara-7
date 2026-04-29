@@ -42,6 +42,8 @@
       attribution: 'Google Maps'
     });
 
+    var storageUrl = "{{ asset('storage') }}";
+
     // Tambahkan default basemap ke peta
     lightMap.addTo(map);
 
@@ -66,6 +68,34 @@
     });
     map.addControl(drawControl);
 
+    function setEditImagePreview(selector, imagePath) {
+      var preview = $(selector);
+      if (!imagePath) {
+        preview.addClass('d-none').attr('src', '');
+        return;
+      }
+      preview.removeClass('d-none').attr('src', storageUrl + '/' + imagePath);
+    }
+
+    function watchImageInput(inputId, previewSelector) {
+      $('#' + inputId).on('change', function() {
+        var file = this.files[0];
+        if (!file) {
+          setEditImagePreview(previewSelector, null);
+          return;
+        }
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          $(previewSelector).removeClass('d-none').attr('src', e.target.result);
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    watchImageInput('image_edit_point', '#image_preview_point');
+    watchImageInput('image_edit_polyline', '#image_preview_polyline');
+    watchImageInput('image_edit_polygon', '#image_preview_polygon');
+
     // Handler saat geometri selesai diedit (drag/resize)
     map.on('draw:edited', function(e) {
       var layers = e.layers;
@@ -80,6 +110,14 @@
         $('#name').val(properties.name);
         $('#description').val(properties.description);
         $('#geom').val(objectGeometry);
+
+        if (type === 'LineString') {
+          setEditImagePreview('#image_preview_polyline', properties.image_path);
+        } else if (type === 'Polygon') {
+          setEditImagePreview('#image_preview_polygon', properties.image_path);
+        } else if (type === 'Point') {
+          setEditImagePreview('#image_preview_point', properties.image_path);
+        }
 
         // Tampilkan modal sesuai tipe
         if (type === 'LineString') {
@@ -110,6 +148,7 @@
               $('#name').val(feature.properties.name);
               $('#description').val(feature.properties.description);
               $('#geom').val(geom);
+              setEditImagePreview('#image_preview_point', feature.properties.image_path);
               $('#editpointModal').modal('show');
             },
             mouseover: function() { layer.bindTooltip(feature.properties.name).openTooltip(); },
@@ -133,6 +172,7 @@
               $('#name').val(feature.properties.name);
               $('#description').val(feature.properties.description);
               $('#geom').val(geom);
+              setEditImagePreview('#image_preview_polyline', feature.properties.image_path);
               $('#editpolylineModal').modal('show');
             },
             mouseover: function() { layer.bindTooltip(feature.properties.name).openTooltip(); },
@@ -156,6 +196,7 @@
               $('#name').val(feature.properties.name);
               $('#description').val(feature.properties.description);
               $('#geom').val(geom);
+              setEditImagePreview('#image_preview_polygon', feature.properties.image_path);
               $('#editpolygonModal').modal('show');
             },
             mouseover: function() { layer.bindTooltip(feature.properties.name).openTooltip(); },

@@ -40,13 +40,16 @@ class PointController extends Controller
 			'geom' => DB::raw("ST_GeomFromText('$request->geom_point')")
 		];
 
-		// create point
-		if (!$this->point->create($data)) {
-			return redirect()->back()->with('error', 'Failed to create point');
+		if ($request->hasFile('image')) {
+			$data['image_path'] = $request->file('image')->store('uploads', 'public');
 		}
 
-		// redirect back
-		return redirect()->back()->with('success', 'Point created successfully');
+		try {
+			Points::create($data);
+			return redirect()->back()->with('success', 'Point created successfully');
+		} catch (\Exception $e) {
+			return redirect()->back()->with('error', 'Failed to create point: ' . $e->getMessage());
+		}
 	}
 
 	/**
@@ -81,6 +84,10 @@ class PointController extends Controller
 			'description' => $request->description,
 			'geom' => DB::raw("ST_GeomFromText('$request->geom')")
 		];
+
+		if ($request->hasFile('image')) {
+			$data['image_path'] = $request->file('image')->store('uploads', 'public');
+		}
 
 		if (!$this->point->find($id)->update($data)) {
 			return redirect()->back()->with('error', 'Failed to update point');

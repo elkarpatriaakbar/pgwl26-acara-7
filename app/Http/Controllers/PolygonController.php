@@ -40,13 +40,16 @@ class PolygonController extends Controller
 			'geom' => DB::raw("ST_GeomFromText('$request->geom_polygon')")
 		];
 
-		// create polygon
-		if (!$this->polygon->create($data)) {
-			return redirect()->back()->with('error', 'Failed to create polygon');
+		if ($request->hasFile('image')) {
+			$data['image_path'] = $request->file('image')->store('uploads', 'public');
 		}
 
-		// redirect back
-		return redirect()->back()->with('success', 'Polygon created successfully');
+		try {
+			Polygons::create($data);
+			return redirect()->back()->with('success', 'Polygon created successfully');
+		} catch (\Exception $e) {
+			return redirect()->back()->with('error', 'Failed to create polygon: ' . $e->getMessage());
+		}
 	}
 
 	/**
@@ -81,6 +84,10 @@ class PolygonController extends Controller
 			'description' => $request->description,
 			'geom' => DB::raw("ST_GeomFromText('$request->geom')")
 		];
+
+		if ($request->hasFile('image')) {
+			$data['image_path'] = $request->file('image')->store('uploads', 'public');
+		}
 
 		if (!$this->polygon->find($id)->update($data)) {
 			return redirect()->back()->with('error', 'Failed to update polygon');
